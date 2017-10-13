@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>NLog.Web.AspNetCore</id>
+    <version>4.4.1</version>
+    <authors>Julian Verdurmen</authors>
+    <owners>Julian Verdurmen</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>http://raw.github.com/NLog/NLog.Web/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/NLog/NLog.Web</projectUrl>
+    <iconUrl>http://nlog-project.org/N.png</iconUrl>
+    <description>Extend NLog with targets and layout renderers for websites and webapplications on the ASP.NET Core platform.</description>
+    <releaseNotes>Update dependencies</releaseNotes>
+    <tags>logging log session NLog web aspnet aspnetcore MVC</tags>
+    <repository type="git" url="git://github.com/NLog/NLog.Web" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.5.1">
+        <dependency id="Microsoft.AspNetCore.Http.Extensions" version="1.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Hosting.Abstractions" version="1.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Routing.Abstractions" version="1.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.PlatformAbstractions" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="NLog" version="5.0.0-beta07" exclude="Build,Analyzers" />
+        <dependency id="NLog.Extensions.Logging" version="1.0.0-rtm-beta5" exclude="Build,Analyzers" />
+        <dependency id="System.ValueTuple" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard1.3">
+        <dependency id="NETStandard.Library" version="1.6.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Http.Extensions" version="1.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Hosting.Abstractions" version="1.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.AspNetCore.Routing.Abstractions" version="1.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.PlatformAbstractions" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="NLog" version="5.0.0-beta07" exclude="Build,Analyzers" />
+        <dependency id="NLog.Extensions.Logging" version="1.0.0-rtm-beta5" exclude="Build,Analyzers" />
+        <dependency id="System.ValueTuple" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

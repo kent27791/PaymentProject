@@ -89,4 +89,9 @@ namespace Payment.Gateway.ViewModels
         [JsonProperty("status")]
         public int Status { get; set; }
     }
+
+    public class GatewayOrderRequestViewModel
+    {
+
+    }
 }

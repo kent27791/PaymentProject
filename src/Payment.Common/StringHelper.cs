@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +15,15 @@ namespace Payment.Common
         {
             StringBuilder data = new StringBuilder();
             Type type = obj.GetType();
+            //var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            //    .Where(p => p.IsDefined(typeof(JsonPropertyAttribute)))
+            //    .OrderBy(p => p.GetCustomAttribute<JsonPropertyAttribute>().Order);
             var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(p => p.IsDefined(typeof(JsonPropertyAttribute)))
-                .OrderBy(p => p.GetCustomAttribute<JsonPropertyAttribute>().Order);
-            //var props = type.GetProperties(BindingFlags.Public | BindingFlags.Instance).OrderBy(p => p.GetCustomAttribute<JsonPropertyAttribute>().Order);
+                .Where(p => p.IsDefined(typeof(FromQueryAttribute)));
             foreach (PropertyInfo prop in props)
             {
-                var jsonAttr = prop.GetCustomAttribute<JsonPropertyAttribute>();
-                var key = jsonAttr.PropertyName;
+                var jsonAttr = prop.GetCustomAttribute<FromQueryAttribute>();
+                var key = jsonAttr.Name;
                 var value = prop.GetValue(obj);
                 if (value != null)
                 {

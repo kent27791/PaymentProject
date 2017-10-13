@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,9 +43,17 @@ namespace Payment.Gateway.Extentions
             return services;
         }
 
+        public static IServiceCollection AddCustomizedAutoMapper(this IServiceCollection services)
+        {
+            services.AddAutoMapper();
+            return services;
+        }
+
         public static IServiceProvider Build(this IServiceCollection services, IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
             return services.BuildServiceProvider();
         }
+
+        
     }
 }

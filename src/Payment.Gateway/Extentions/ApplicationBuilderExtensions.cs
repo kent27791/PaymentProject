@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
+using NLog.Web;
+using NLog;
 
 namespace Payment.Gateway.Extentions
 {
@@ -59,6 +63,17 @@ namespace Payment.Gateway.Extentions
                 });
             }
 
+            return app;
+        }
+
+        public static IApplicationBuilder UseCustomizedLogger(this IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            //add Nlog
+            loggerFactory.AddNLog();
+            //add NLog.Web
+            app.AddNLogWeb();
+            //config
+            env.ConfigureNLog("nlog.config");
             return app;
         }
     }
