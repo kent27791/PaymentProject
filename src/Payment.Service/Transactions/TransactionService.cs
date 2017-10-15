@@ -1,4 +1,6 @@
-﻿using Payment.Core.Data;
+﻿using System.Linq;
+
+using Payment.Core.Data;
 using Payment.Data.DatabaseContext;
 using Payment.Service.Log;
 using Payment.Core.Domain.Transactions;
@@ -17,6 +19,11 @@ namespace Payment.Service.Transactions
         public ISendOrderTransactionService SendOrder
         {
             get { return _sendOrderTransactionService; }
+        }
+
+        public bool IsExistBcoinId(string bcoinId)
+        {
+            return _repository.Query().Any(t => t.BcoinId.Equals(bcoinId));
         }
     }
 }

@@ -105,12 +105,14 @@ namespace Payment.Gateway.ViewModels
         /// Số gCoin tương ứng User muốn rút
         /// </summary>
         [FromQuery(Name = "amount")]
+        [Required]
         public int Amount { get; set; }
 
         /// <summary>
         /// Định danh ví của User, dưới dạng số điện thoại. Chú ý là phải bắt đầu bằng '+84' nhưng do query trên url nên kí tự '+' được thể hiện là '%2B' CHÚ Ý: Khác với các hàm tạo giao dịch khác, tham số này là bắt buộc.
         /// </summary>
         [FromQuery(Name = "user_nophone")]
+        [Required]
         public string UserNophone { get; set; }
 
         /// <summary>

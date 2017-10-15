@@ -13,6 +13,7 @@ namespace Payment.Gateway.Mapper
         {
             CreateMap<GatewaySendOrderRequestViewModel, GcoinSendOrderRequestViewModel>()
                 .ForMember(des => des.TransRef, src => src.MapFrom(opts => $"BTC_{ Guid.NewGuid().ToString() }"));
+            CreateMap<GcoinSendOrderResponseViewModel, GatewaySendOrderResponseViewModel>();
         }
     }
 }

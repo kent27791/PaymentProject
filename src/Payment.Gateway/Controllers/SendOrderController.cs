@@ -41,44 +41,55 @@ namespace Payment.Gateway.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                //mapper to object gcoin
-                var gcoinSendOrderRequestViewModel = _mapper.Map<GatewaySendOrderRequestViewModel, GcoinSendOrderRequestViewModel>(requestViewModel);
-                //send to gcoin
-                HttpResponseMessage gCoinResponse = GcoinExtentions.SendGcoin<GcoinSendOrderRequestViewModel>("/gateway/send_order?", gcoinSendOrderRequestViewModel);
-                var gCoinResponseContent = gCoinResponse.Content.ReadAsStringAsync().Result;
-                if (gCoinResponse.IsSuccessStatusCode)
+                //check exist 
+                if (!_transactionService.IsExistBcoinId(requestViewModel.TransRef))
                 {
-                    var gCoinResponseObject = JsonConvert.DeserializeObject<GcoinSendOrderResponseViewModel>(gCoinResponseContent);
-                    //save to transaction table
-                    var transaction = new Transaction
+                    //mapper to object gcoin
+                    var gcoinSendOrderRequestViewModel = _mapper.Map<GatewaySendOrderRequestViewModel, GcoinSendOrderRequestViewModel>(requestViewModel);
+                    //send to gcoin
+                    HttpResponseMessage gCoinResponse = GcoinExtentions.SendGcoin<GcoinSendOrderRequestViewModel>("/gateway/send_order?", gcoinSendOrderRequestViewModel);
+                    var gCoinResponseContent = gCoinResponse.Content.ReadAsStringAsync().Result;
+                    if (gCoinResponse.IsSuccessStatusCode)
                     {
-                        Id = gcoinSendOrderRequestViewModel.TransRef,
-                        BcoinId = requestViewModel.TransRef,
-                        GcoinId = gCoinResponseObject.SendOrderId,
-                        Status = (int)TransactionStatus.Init,
-                        Result = gCoinResponseContent
-                    };
-                    _transactionService.Add(transaction);
-                    //save to order-transction table
-                    var sendOrderTransaction = new SendOrderTransaction
+                        var gCoinResponseObject = JsonConvert.DeserializeObject<GcoinSendOrderResponseViewModel>(gCoinResponseContent);
+                        //save to transaction table
+                        var transaction = new Transaction
+                        {
+                            Id = gcoinSendOrderRequestViewModel.TransRef,
+                            BcoinId = requestViewModel.TransRef,
+                            GcoinId = gCoinResponseObject.SendOrderId,
+                            Status = (int)TransactionStatus.Successed,
+                            Result = gCoinResponseContent
+                        };
+                        _transactionService.Add(transaction);
+                        //save to order-transction table
+                        var sendOrderTransaction = new SendOrderTransaction
+                        {
+                            Id = gCoinResponseObject.SendOrderId,
+                            UserNophone = gCoinResponseObject.UserNophone,
+                            Address = gCoinResponseObject.Address,
+                            Amount = gCoinResponseObject.Amount,
+                            CreatedOn = gCoinResponseObject.CreatedOn,
+                            Time = gCoinResponseObject.Time,
+                            Status = gCoinResponseObject.Status
+                        };
+                        _transactionService.SendOrder.Add(sendOrderTransaction);
+                        //return to partner
+                        var bCoinResponseObject = _mapper.Map<GcoinSendOrderResponseViewModel, GatewaySendOrderResponseViewModel>(gCoinResponseObject);
+                        bCoinResponseObject.SendOrderId = transaction.Id;
+                        return Ok(bCoinResponseObject);
+                    }
+                    else
                     {
-                        Id = gCoinResponseObject.SendOrderId,
-                        UserNophone = gCoinResponseObject.UserNophone,
-                        Address = gCoinResponseObject.Address,
-                        CreatedOn = gCoinResponseObject.CreatedOn,
-                        Time = gCoinResponseObject.Time,
-                        Status = gCoinResponseObject.Status
-                    };
-                    _transactionService.SendOrder.Add(sendOrderTransaction);
-                    //return to partner
-                    var bCoinResponseObject = _mapper.Map<GcoinSendOrderResponseViewModel, GatewaySendOrderResponseViewModel>(gCoinResponseObject);
-                    bCoinResponseObject.SendOrderId = transaction.Id;
-                    return Ok(bCoinResponseObject);
+                        return BadRequest(gCoinResponseContent);
+                    }
                 }
                 else
                 {
-                    return BadRequest(gCoinResponseContent);
+                    return BadRequest("TRANSACTION_EXIST");
                 }
+
+                
             }
             catch(Exception ex)
             {
