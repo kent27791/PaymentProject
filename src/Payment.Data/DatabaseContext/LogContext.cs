@@ -16,6 +16,11 @@ namespace Payment.Data.DatabaseContext
 
         public DbSet<SystemLog> SystemLogs { get; set; }
 
+        public void Commit()
+        {
+            SaveChanges();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SystemLog>().ToTable("SystemLog");

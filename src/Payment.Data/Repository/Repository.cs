@@ -22,6 +22,13 @@ namespace Payment.Data.Repository
             _dbSet = _databaseContext.Set<TEntity>();
         }
 
+        public TEntity Add(TEntity entity)
+        {
+            _dbSet.Add(entity);
+            _databaseContext.Commit();
+            return entity;
+        }
+
         public IQueryable<TEntity> Query()
         {
             return _dbSet;

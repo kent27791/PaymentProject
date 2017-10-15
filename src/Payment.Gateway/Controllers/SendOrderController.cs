@@ -8,8 +8,11 @@ using Payment.Gateway.ViewModels;
 using Payment.Gateway.Extentions;
 using System.Net.Http;
 using AutoMapper;
-using Payment.Gateway.Filters;
 using Microsoft.Extensions.Logging;
+using Payment.Service.Transactions;
+using Payment.Core.Domain.Transactions;
+using Payment.Common.Enums;
+using Newtonsoft.Json;
 
 namespace Payment.Gateway.Controllers
 {
@@ -18,21 +21,70 @@ namespace Payment.Gateway.Controllers
     //[GatewayMerchant]
     public class SendOrderController : Controller
     {
+        private readonly ITransactionService _transactionService;
         private readonly IMapper _mapper;
-        public SendOrderController(IMapper mapper, ILoggerFactory loggerFactory)
+        private readonly ILogger<SendOrderController> _logger;
+        public SendOrderController(ITransactionService transactionService, IMapper mapper, ILogger<SendOrderController> logger)
         {
+            _transactionService = transactionService;
             _mapper = mapper;
-            ILogger logger = loggerFactory.CreateLogger("PaymentGateway");
-            logger.LogInformation("test");
+            _logger = logger;
         }
 
         [HttpGet]
         [Route("create")]
         public IActionResult Create(GatewaySendOrderRequestViewModel requestViewModel)
         {
-            var gcoinSendOrderRequestViewModel = _mapper.Map<GatewaySendOrderRequestViewModel, GcoinSendOrderRequestViewModel>(requestViewModel);
-            //HttpResponseMessage response = GcoinExtentions.SendGcoin<GcoinSendOrderRequestViewModel>("/gateway/send_order?", requestViewModel);
-            return Json("");
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                //mapper to object gcoin
+                var gcoinSendOrderRequestViewModel = _mapper.Map<GatewaySendOrderRequestViewModel, GcoinSendOrderRequestViewModel>(requestViewModel);
+                //send to gcoin
+                HttpResponseMessage gCoinResponse = GcoinExtentions.SendGcoin<GcoinSendOrderRequestViewModel>("/gateway/send_order?", gcoinSendOrderRequestViewModel);
+                var gCoinResponseContent = gCoinResponse.Content.ReadAsStringAsync().Result;
+                if (gCoinResponse.IsSuccessStatusCode)
+                {
+                    var gCoinResponseObject = JsonConvert.DeserializeObject<GcoinSendOrderResponseViewModel>(gCoinResponseContent);
+                    //save to transaction table
+                    var transaction = new Transaction
+                    {
+                        Id = gcoinSendOrderRequestViewModel.TransRef,
+                        BcoinId = requestViewModel.TransRef,
+                        GcoinId = gCoinResponseObject.SendOrderId,
+                        Status = (int)TransactionStatus.Init,
+                        Result = gCoinResponseContent
+                    };
+                    _transactionService.Add(transaction);
+                    //save to order-transction table
+                    var sendOrderTransaction = new SendOrderTransaction
+                    {
+                        Id = gCoinResponseObject.SendOrderId,
+                        UserNophone = gCoinResponseObject.UserNophone,
+                        Address = gCoinResponseObject.Address,
+                        CreatedOn = gCoinResponseObject.CreatedOn,
+                        Time = gCoinResponseObject.Time,
+                        Status = gCoinResponseObject.Status
+                    };
+                    _transactionService.SendOrder.Add(sendOrderTransaction);
+                    //return to partner
+                    var bCoinResponseObject = _mapper.Map<GcoinSendOrderResponseViewModel, GatewaySendOrderResponseViewModel>(gCoinResponseObject);
+                    bCoinResponseObject.SendOrderId = transaction.Id;
+                    return Ok(bCoinResponseObject);
+                }
+                else
+                {
+                    return BadRequest(gCoinResponseContent);
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [HttpGet]

@@ -8,5 +8,6 @@ namespace Payment.Core.DatabaseContext
     public interface IDatabaseContext<TContext> where TContext : class
     {
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
+        void Commit();
     }
 }

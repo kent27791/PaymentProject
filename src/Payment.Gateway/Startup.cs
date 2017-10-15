@@ -11,20 +11,16 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-
-using Payment.Core.Service;
-using Payment.Service;
 using Payment.Core.Data;
 using Payment.Data.Repository;
 using Payment.Core.Domain.Transactions;
-using Payment.Core.DatabaseFactory;
-using Payment.Data.DatabaseFactory;
 using Payment.Data.DatabaseContext;
 using Payment.Core.Configuration;
 using Payment.Gateway.Extentions;
 using Payment.Core.DatabaseContext;
 using Payment.Core.Domain.SystemLogs;
 using Payment.Service.Log;
+using Payment.Service.Transactions;
 
 namespace Payment.Gateway
 {
@@ -54,8 +50,11 @@ namespace Payment.Gateway
             services.AddSingleton<IDatabaseContext<LogContext>, LogContext>();
 
             services.AddTransient<IRepository<PaymentContext, Transaction, string>, Repository<PaymentContext, Transaction, string>>();
-            services.AddTransient<ITransactionService, TransactionService>();
+            services.AddTransient<IRepository<PaymentContext, SendOrderTransaction, string>, Repository<PaymentContext, SendOrderTransaction, string>>();
             services.AddTransient<IRepository<LogContext, SystemLog, int>, Repository<LogContext, SystemLog, int>>();
+
+            services.AddTransient<ITransactionService, TransactionService>();
+            services.AddTransient<ISendOrderTransactionService, SendOrderTransactionService>();
             services.AddTransient<ISystemLogService, SystemLogService>();
             return services.Build(_configuration, _hostingEnvironment);
         }

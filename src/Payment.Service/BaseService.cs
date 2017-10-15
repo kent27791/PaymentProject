@@ -29,5 +29,10 @@ namespace Payment.Service
         {
             return _repository.Query().ToList();
         }
+
+        public TEntity Add(TEntity entity)
+        {
+            return _repository.Add(entity);
+        }
     }
 }

@@ -18,5 +18,12 @@ namespace Payment.Data.DatabaseContext
             modelBuilder.Entity<Transaction>().ToTable("Transaction");
             base.OnModelCreating(modelBuilder);
         }
+
+
+        public void Commit()
+        {
+            SaveChanges();
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -97,6 +98,7 @@ namespace Payment.Gateway.ViewModels
         /// Mã của giao dịch trong hệ thống của Merchant (gửi lên để đối soát về sau)
         /// </summary>
         [FromQuery(Name = "trans_ref")]
+        [Required]
         public string TransRef { get; set; }
 
         /// <summary>

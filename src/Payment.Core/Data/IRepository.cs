@@ -12,5 +12,6 @@ namespace Payment.Core.Data
         where TContext : class
     {
         IQueryable<TEntity> Query();
+        TEntity Add(TEntity entity);
     }
 }

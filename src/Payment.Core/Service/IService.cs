@@ -11,5 +11,6 @@ namespace Payment.Core.Service
     {
         TEntity Get(TKey key);
         IEnumerable<TEntity> GetAll();
+        TEntity Add(TEntity entity);
     }
 }

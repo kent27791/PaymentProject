@@ -11,7 +11,8 @@ namespace Payment.Gateway.Mapper
     {
         public MappingProfile()
         {
-            CreateMap<GatewaySendOrderRequestViewModel, GcoinSendOrderRequestViewModel>();
+            CreateMap<GatewaySendOrderRequestViewModel, GcoinSendOrderRequestViewModel>()
+                .ForMember(des => des.TransRef, src => src.MapFrom(opts => $"BTC_{ Guid.NewGuid().ToString() }"));
         }
     }
 }
