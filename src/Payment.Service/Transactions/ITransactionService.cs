@@ -10,5 +10,8 @@ namespace Payment.Service.Transactions
     {
         ISendOrderTransactionService SendOrder { get; }
         bool IsExistBcoinId(string bcoinId);
+        Transaction GetByBcoinId(string bcoinId);
+        Transaction GetByGcoinId(string gcoinId);
+        Transaction GetByIdOrBcoinId(string id, string bcoinId);
     }
 }

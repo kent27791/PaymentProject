@@ -21,6 +21,21 @@ namespace Payment.Service.Transactions
             get { return _sendOrderTransactionService; }
         }
 
+        public Transaction GetByBcoinId(string bcoinId)
+        {
+            return _repository.Query().SingleOrDefault(t => t.BcoinId.Equals(bcoinId));
+        }
+
+        public Transaction GetByGcoinId(string gcoinId)
+        {
+            return _repository.Query().SingleOrDefault(t => t.GcoinId.Equals(gcoinId));
+        }
+
+        public Transaction GetByIdOrBcoinId(string id, string bcoinId)
+        {
+            return _repository.Query().SingleOrDefault(t => t.Id.Equals(id) || t.BcoinId.Equals(bcoinId));
+        }
+
         public bool IsExistBcoinId(string bcoinId)
         {
             return _repository.Query().Any(t => t.BcoinId.Equals(bcoinId));

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Payment.Gateway.ViewModels
 {
+    #region Gcoin
     public class GcoinSendOrderRequestViewModel
     {
         /// <summary>
@@ -92,6 +93,17 @@ namespace Payment.Gateway.ViewModels
         public int Status { get; set; }
     }
 
+    public class GcoinCheckSendOrderRequestViewModel
+    {
+        [FromQuery(Name = "transRef")]
+        public string TransRef { get; set; }
+
+        [FromQuery(Name = "sendOrderId")]
+        public string SendOrderId { get; set; }
+    }
+    #endregion
+
+    #region Gateway
     public class GatewaySendOrderRequestViewModel
     {
         /// <summary>
@@ -178,4 +190,14 @@ namespace Payment.Gateway.ViewModels
         [JsonProperty("status")]
         public int Status { get; set; }
     }
+
+    public class GatewayCheckSendOrderRequestViewModel
+    {
+        [FromQuery(Name = "trans_ref")]
+        public string TransRef { get; set; }
+
+        [FromQuery(Name = "send_order_id")]
+        public string SendOrderId { get; set; }
+    }
+    #endregion
 }
