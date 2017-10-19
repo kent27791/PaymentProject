@@ -38,7 +38,7 @@ namespace Payment.Gateway.Controllers
         {
             try
             {
-                _logger.LogDebug("----------Begin create send order transaction----------");
+                _logger.LogDebug("----------Begin create [SEND ORDER] transaction----------");
                 //validate model
                 if (!ModelState.IsValid)
                 {
@@ -110,7 +110,7 @@ namespace Payment.Gateway.Controllers
             }
             finally
             {
-                _logger.LogDebug("----------End create send order transaction----------");
+                _logger.LogDebug("----------End create [SEND ORDER] transaction----------");
             }
         }
 
@@ -121,7 +121,7 @@ namespace Payment.Gateway.Controllers
             
             try
             {
-                _logger.LogDebug("----------Begin check send order----------");
+                _logger.LogDebug("----------Begin check [Send Order]----------");
                 if (!ModelState.IsValid)
                 {
                     var errors = ModelState.GetErrors();
@@ -162,7 +162,7 @@ namespace Payment.Gateway.Controllers
             }
             finally
             {
-                _logger.LogDebug("----------Begin check send order----------");
+                _logger.LogDebug("----------Begin check [Send Order]----------");
             }
         }
 

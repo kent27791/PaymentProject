@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Payment.Service.Log;
+using Microsoft.Extensions.Logging;
+using Payment.Service.Merchants;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,15 @@ namespace Payment.Gateway.Filters
 
         }
     }
+    //http://www.softawareblog.com/combining-basic-authentication-with-forms-authentication/
     public class GatewayMerchantFilter : IActionFilter
     {
-        private readonly ISystemLogService _systemLogService;
-        public GatewayMerchantFilter(ISystemLogService systemLogService)
+        private readonly ILogger<GatewayMerchantFilter> _logger;
+        private readonly IMerchantService _merchantService;
+        public GatewayMerchantFilter(ILogger<GatewayMerchantFilter> logger, IMerchantService merchantService)
         {
-            _systemLogService = systemLogService;
+            _logger = logger;
+            _merchantService = merchantService;
         }
         public void OnActionExecuted(ActionExecutedContext context)
         {

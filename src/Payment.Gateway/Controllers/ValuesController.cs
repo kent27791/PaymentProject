@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 
 using Payment.Service.Log;
 using Payment.Service.Transactions;
+using Payment.Gateway.Filters;
 
 namespace Payment.Gateway.Controllers
 {
     [Route("api/[controller]")]
+    [ServiceFilter(typeof(IpAddressAttribute))]
     public class ValuesController : Controller
     {
         private readonly ITransactionService _transactionService;

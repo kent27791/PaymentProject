@@ -11,14 +11,21 @@ namespace Payment.Service.Transactions
     public class TransactionService : BaseService<PaymentContext, Transaction, string>, ITransactionService
     {
         private readonly ISendOrderTransactionService _sendOrderTransactionService;
-        public TransactionService(IRepository<PaymentContext, Transaction, string> repository, ISendOrderTransactionService sendOrderTransactionService) : base(repository)
+        private readonly IOrderTransactionService _orderTransactionService;
+        public TransactionService(IRepository<PaymentContext, Transaction, string> repository, ISendOrderTransactionService sendOrderTransactionService, IOrderTransactionService orderTransactionService) : base(repository)
         {
+            _orderTransactionService = orderTransactionService;
             _sendOrderTransactionService = sendOrderTransactionService;
         }
 
         public ISendOrderTransactionService SendOrder
         {
             get { return _sendOrderTransactionService; }
+        }
+
+        public IOrderTransactionService Order
+        {
+            get { return _orderTransactionService; }
         }
 
         public Transaction GetByBcoinId(string bcoinId)

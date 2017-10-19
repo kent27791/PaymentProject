@@ -6955,22 +6955,22 @@
     ]
   },
   "packageFolders": {
-    "G:\\Hoc Lap Trinh\\Code Nang Cao\\MVC Project\\NetCore\\PaymentProject\\libs": {},
+    "D:\\ProjectPCC\\Projects\\PaymentProject\\libs": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "restore": {
       "projectUniqueName": "microsoft.visualstudio.web.codegeneration.tools-.netcoreapp-[2.0.0, )",
       "projectName": "microsoft.visualstudio.web.codegeneration.tools-.netcoreapp-[2.0.0, )",
-      "projectPath": "G:\\Hoc Lap Trinh\\Code Nang Cao\\MVC Project\\NetCore\\PaymentProject\\src\\Payment.Gateway\\Payment.Gateway.csproj",
-      "packagesPath": "G:\\Hoc Lap Trinh\\Code Nang Cao\\MVC Project\\NetCore\\PaymentProject\\libs",
+      "projectPath": "D:\\ProjectPCC\\Projects\\PaymentProject\\src\\Payment.Gateway\\Payment.Gateway.csproj",
+      "packagesPath": "D:\\ProjectPCC\\Projects\\PaymentProject\\libs",
       "projectStyle": "DotnetCliTool",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "G:\\Hoc Lap Trinh\\Code Nang Cao\\MVC Project\\NetCore\\PaymentProject\\src\\NuGet.Config",
-        "C:\\Users\\phanx\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "D:\\ProjectPCC\\Projects\\PaymentProject\\src\\NuGet.Config",
+        "d:\\data_user\\cuongpc\\Application Data\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "sources": {

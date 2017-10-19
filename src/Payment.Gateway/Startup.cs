@@ -13,14 +13,21 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Payment.Core.Data;
 using Payment.Data.Repository;
-using Payment.Core.Domain.Transactions;
+
 using Payment.Data.DatabaseContext;
 using Payment.Core.Configuration;
 using Payment.Gateway.Extentions;
 using Payment.Core.DatabaseContext;
-using Payment.Core.Domain.SystemLogs;
 using Payment.Service.Log;
 using Payment.Service.Transactions;
+
+using Payment.Core.Domain.Members;
+using Payment.Core.Domain.Mertchants;
+using Payment.Core.Domain.Transactions;
+using Payment.Core.Domain.SystemLogs;
+using Payment.Service.Members;
+using Payment.Service.Merchants;
+using Payment.Gateway.Filters;
 
 namespace Payment.Gateway
 {
@@ -50,12 +57,21 @@ namespace Payment.Gateway
             services.AddSingleton<IDatabaseContext<LogContext>, LogContext>();
 
             services.AddTransient<IRepository<PaymentContext, Transaction, string>, Repository<PaymentContext, Transaction, string>>();
+            services.AddTransient<IRepository<PaymentContext, OrderTransaction, string>, Repository<PaymentContext, OrderTransaction, string>>();
             services.AddTransient<IRepository<PaymentContext, SendOrderTransaction, string>, Repository<PaymentContext, SendOrderTransaction, string>>();
+            services.AddTransient<IRepository<PaymentContext, Member, int>, Repository<PaymentContext, Member, int>>();
+            services.AddTransient<IRepository<PaymentContext, Merchant, string>, Repository<PaymentContext, Merchant, string>>();
             services.AddTransient<IRepository<LogContext, SystemLog, int>, Repository<LogContext, SystemLog, int>>();
 
             services.AddTransient<ITransactionService, TransactionService>();
+            services.AddTransient<IOrderTransactionService, OrderTransactionService>();
             services.AddTransient<ISendOrderTransactionService, SendOrderTransactionService>();
+            services.AddTransient<IMemberService, MemberService>();
+            services.AddTransient<IMerchantService, MerchantService>();
             services.AddTransient<ISystemLogService, SystemLogService>();
+
+            services.AddTransient<IpAddressAttribute>();
+
             return services.Build(_configuration, _hostingEnvironment);
         }
 

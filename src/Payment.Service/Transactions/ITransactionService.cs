@@ -9,6 +9,7 @@ namespace Payment.Service.Transactions
     public interface ITransactionService : IService<PaymentContext, Transaction, string>
     {
         ISendOrderTransactionService SendOrder { get; }
+        IOrderTransactionService Order { get; }
         bool IsExistBcoinId(string bcoinId);
         Transaction GetByBcoinId(string bcoinId);
         Transaction GetByGcoinId(string gcoinId);
