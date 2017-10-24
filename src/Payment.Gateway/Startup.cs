@@ -52,6 +52,7 @@ namespace Payment.Gateway
             services.AddCustomizedMvc();
             services.AddCustomizedDataStore(_settings);
             services.AddCustomizedAutoMapper();
+            services.AddCustomizedSwagger();
 
             services.AddSingleton<IDatabaseContext<PaymentContext>, PaymentContext>();
             services.AddSingleton<IDatabaseContext<LogContext>, LogContext>();
@@ -91,6 +92,7 @@ namespace Payment.Gateway
             app.UseCustomizedIdentity();
             app.UseCustomizedMvc();
             app.UseCustomizedLogger(env, loggerFactory);
+            app.UseCustomizedSwagger();
         }
     }
 }

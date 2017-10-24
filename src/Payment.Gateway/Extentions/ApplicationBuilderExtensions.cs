@@ -76,5 +76,15 @@ namespace Payment.Gateway.Extentions
             env.ConfigureNLog("nlog.config");
             return app;
         }
+
+        public static IApplicationBuilder UseCustomizedSwagger(this IApplicationBuilder app)
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Payment api document version 1");
+            });
+            return app;
+        }
     }
 }

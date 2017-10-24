@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using Payment.Core.Configuration;
 using Payment.Data.DatabaseContext;
+using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,11 +50,21 @@ namespace Payment.Gateway.Extentions
             return services;
         }
 
+        public static IServiceCollection AddCustomizedSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(c => 
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Payment api document", Version = "v1" });
+            });
+            return services;
+        }
+
         public static IServiceProvider Build(this IServiceCollection services, IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
             return services.BuildServiceProvider();
         }
 
+        
         
     }
 }
