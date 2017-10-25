@@ -10,10 +10,10 @@ using System.Net.Http;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
 using Payment.Service.Transactions;
-using Payment.Core.Domain.Transactions;
 using Payment.Common.Enums;
 using Newtonsoft.Json;
 using Payment.Common;
+using Payment.Core.Domain.Payment;
 
 namespace Payment.Gateway.Controllers
 {
@@ -34,6 +34,7 @@ namespace Payment.Gateway.Controllers
 
         [HttpGet]
         [Route("create")]
+        [ProducesResponseType(typeof(GatewaySendOrderResponseViewModel), 200)]
         public IActionResult Create(GatewaySendOrderRequestViewModel requestViewModel)
         {
             try

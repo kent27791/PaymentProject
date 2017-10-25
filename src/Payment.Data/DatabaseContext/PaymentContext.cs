@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Payment.Core.DatabaseContext;
-using Payment.Core.Domain.Transactions;
+using Payment.Core.Mapping.Payment;
 
 namespace Payment.Data.DatabaseContext
 {
@@ -11,18 +11,15 @@ namespace Payment.Data.DatabaseContext
             
         }
 
-        public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<OrderTransaction> OrderTransactions { get; set; }
-        public DbSet<SendOrderTransaction> SendOrderTransactions { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Transaction>().ToTable("Transaction");
-            modelBuilder.Entity<OrderTransaction>().ToTable("OrderTransaction");
-            modelBuilder.Entity<SendOrderTransaction>().ToTable("SendOrderTransaction");
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new MemberMap());
+            modelBuilder.ApplyConfiguration(new MerchantMap());
+            modelBuilder.ApplyConfiguration(new TransactionMap());
+            modelBuilder.ApplyConfiguration(new OrderTransactionMap());
+            modelBuilder.ApplyConfiguration(new SendOrderTransactionMap());
         }
-
 
         public void Commit()
         {

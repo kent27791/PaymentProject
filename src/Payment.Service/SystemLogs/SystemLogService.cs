@@ -1,9 +1,6 @@
-﻿using Payment.Core.Data;
-using Payment.Core.Domain.SystemLogs;
-using Payment.Data.DatabaseContext;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Payment.Data.DatabaseContext;
+using Payment.Core.Data;
+using Payment.Core.Domain.Log;
 
 namespace Payment.Service.Log
 {

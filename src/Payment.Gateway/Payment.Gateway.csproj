@@ -6,13 +6,12 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netcoreapp2.0\Payment.Gateway.xml</DocumentationFile>
+    <NoWarn>1701;1702;1705; 1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="Controllers\BankController.cs" />
-    <Compile Remove="Controllers\OrderController.cs" />
     <Compile Remove="Controllers\PaymentController.cs" />
-    <Compile Remove="Controllers\SendOrderController.cs" />
   </ItemGroup>
 
   <ItemGroup>

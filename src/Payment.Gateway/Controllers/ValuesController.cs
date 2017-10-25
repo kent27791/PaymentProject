@@ -9,19 +9,19 @@ using Payment.Gateway.Filters;
 namespace Payment.Gateway.Controllers
 {
     [Route("api/[controller]")]
-    [ServiceFilter(typeof(IpAddressAttribute))]
+    //[ServiceFilter(typeof(GatewayAuthorizationAttribute))]
     public class ValuesController : Controller
     {
         private readonly ITransactionService _transactionService;
-        private readonly ISystemLogService _systemLogService;
-        public ValuesController(ITransactionService transactionService, ISystemLogService systemLogService)
+        public ValuesController(ITransactionService transactionService)
         {
             _transactionService = transactionService;
-            _systemLogService = systemLogService;
         }
         [HttpGet]
         public IActionResult Get()
         {
+            var test = _transactionService.GetAll();
+            var test_1 = _transactionService.Order.GetAll();
             return Json("Ok");
         }
     }

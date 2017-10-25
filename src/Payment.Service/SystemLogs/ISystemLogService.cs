@@ -1,4 +1,4 @@
-﻿using Payment.Core.Domain.SystemLogs;
+﻿using Payment.Core.Domain.Log;
 using Payment.Core.Service;
 using Payment.Data.DatabaseContext;
 

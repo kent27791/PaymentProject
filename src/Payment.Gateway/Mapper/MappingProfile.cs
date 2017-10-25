@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using Payment.Core.Domain.Transactions;
+﻿using System;
+
+using AutoMapper;
 using Payment.Gateway.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Payment.Core.Domain.Payment;
 
 namespace Payment.Gateway.Mapper
 {

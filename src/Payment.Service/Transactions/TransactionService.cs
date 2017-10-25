@@ -1,10 +1,7 @@
-﻿using System.Linq;
-
-using Payment.Core.Data;
+﻿using Payment.Core.Domain.Payment;
 using Payment.Data.DatabaseContext;
-using Payment.Service.Log;
-using Payment.Core.Domain.Transactions;
-using Payment.Service;
+using Payment.Core.Data;
+using System.Linq;
 
 namespace Payment.Service.Transactions
 {

@@ -1,9 +1,6 @@
-﻿using Payment.Core.Data;
-using Payment.Core.Domain.Mertchants;
+﻿using Payment.Core.Domain.Payment;
 using Payment.Data.DatabaseContext;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Payment.Core.Data;
 
 namespace Payment.Service.Merchants
 {

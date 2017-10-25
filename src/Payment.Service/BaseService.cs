@@ -1,12 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Payment.Core.Data;
-using Payment.Core.DatabaseContext;
-using Payment.Core.Domain;
-using Payment.Core.Service;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+
+using Payment.Core.Data;
+using Payment.Core.Domain;
+using Payment.Core.Service;
 namespace Payment.Service
 {
     public class BaseService<TContext, TEntity, TKey> : IService<TContext, TEntity, TKey> 

@@ -12,14 +12,14 @@ using Payment.Common;
 using System.Net.Http;
 using Payment.Gateway.Extentions;
 using Newtonsoft.Json;
-using Payment.Core.Domain.Transactions;
 using Payment.Common.Enums;
+using Payment.Core.Domain.Payment;
 
 namespace Payment.Gateway.Controllers
 {
     [Produces("application/json")]
     [Route("api/order")]
-    public class OrderController : PaymentController
+    public class OrderController : Controller
     {
         private readonly ITransactionService _transactionService;
         private readonly IMapper _mapper;
@@ -32,8 +32,9 @@ namespace Payment.Gateway.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet]   
         [Route("create")]
+        [ProducesResponseType(typeof(GatewayOrderResponseViewModel), 200)]
         public IActionResult Create(GatewayOrderRequestViewModel requestViewModel)
         {
             try

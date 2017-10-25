@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Payment.Core.DatabaseContext;
-using Payment.Core.Domain.SystemLogs;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Payment.Core.Domain.Log;
 
 namespace Payment.Data.DatabaseContext
 {
@@ -14,17 +11,15 @@ namespace Payment.Data.DatabaseContext
 
         }
 
-        public DbSet<SystemLog> SystemLogs { get; set; }
-
-        public void Commit()
-        {
-            SaveChanges();
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<SystemLog>().ToTable("SystemLog");
             base.OnModelCreating(modelBuilder);
+        }
+
+        public void Commit()
+        {
+            SaveChanges();
         }
     }
 }

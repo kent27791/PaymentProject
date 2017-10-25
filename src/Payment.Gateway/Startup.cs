@@ -1,33 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
-using Payment.Core.Data;
-using Payment.Data.Repository;
 
-using Payment.Data.DatabaseContext;
+using Payment.Core.Data;
 using Payment.Core.Configuration;
-using Payment.Gateway.Extentions;
 using Payment.Core.DatabaseContext;
+using Payment.Core.Domain.Payment;
+using Payment.Core.Domain.Log;
+
+using Payment.Data.Repository;
+using Payment.Data.DatabaseContext;
+
 using Payment.Service.Log;
 using Payment.Service.Transactions;
-
-using Payment.Core.Domain.Members;
-using Payment.Core.Domain.Mertchants;
-using Payment.Core.Domain.Transactions;
-using Payment.Core.Domain.SystemLogs;
 using Payment.Service.Members;
 using Payment.Service.Merchants;
+
 using Payment.Gateway.Filters;
+using Payment.Gateway.Extentions;
+
 
 namespace Payment.Gateway
 {
@@ -71,7 +67,7 @@ namespace Payment.Gateway
             services.AddTransient<IMerchantService, MerchantService>();
             services.AddTransient<ISystemLogService, SystemLogService>();
 
-            services.AddTransient<IpAddressAttribute>();
+            services.AddTransient<GatewayAuthorizationAttribute>();
 
             return services.Build(_configuration, _hostingEnvironment);
         }
