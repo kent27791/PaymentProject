@@ -11,9 +11,10 @@ namespace Payment.Gateway.Filters
 {
     public class GatewayMerchantAttribute : TypeFilterAttribute
     {
+        public bool IsTest { get; set; }
         public GatewayMerchantAttribute() : base(typeof(GatewayMerchantFilter))
         {
-
+            
         }
     }
     //http://www.softawareblog.com/combining-basic-authentication-with-forms-authentication/
@@ -21,11 +22,12 @@ namespace Payment.Gateway.Filters
     {
         private readonly ILogger<GatewayMerchantFilter> _logger;
         private readonly IMerchantService _merchantService;
-        public GatewayMerchantFilter(ILogger<GatewayMerchantFilter> logger, IMerchantService merchantService)
+        public GatewayMerchantFilter(ILogger<GatewayMerchantFilter> logger, IMerchantService merchantService, TestClass test)
         {
             _logger = logger;
             _merchantService = merchantService;
         }
+
         public void OnActionExecuted(ActionExecutedContext context)
         {
             throw new NotImplementedException();

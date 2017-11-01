@@ -11,6 +11,6 @@ namespace Payment.Core.Domain.Payment
         public int? Time { get; set; }
         public int Status { get; set; }
 
-        //public Transaction Transaction { get; set; }
+        public Transaction Transaction { get; set; }
     }
 }

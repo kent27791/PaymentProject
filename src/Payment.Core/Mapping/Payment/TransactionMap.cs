@@ -10,7 +10,10 @@ namespace Payment.Core.Mapping.Payment
         public override void Configure(EntityTypeBuilder<Transaction> builder)
         {
             base.Configure(builder);
+            builder.HasOne(c => c.OrderTransaction)
+                  .WithOne(u => u.Transaction);
             builder.ToTable("Transaction");
+           
         }
     }
 }

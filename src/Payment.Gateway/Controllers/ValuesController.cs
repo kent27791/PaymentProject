@@ -10,6 +10,9 @@ namespace Payment.Gateway.Controllers
 {
     [Route("api/[controller]")]
     //[ServiceFilter(typeof(GatewayAuthorizationAttribute))]
+    [TypeFilter(typeof(TestAttribute), Arguments =  new object[] { true })]
+    //[GatewayMerchant(IsTest = true)]
+    //[GatewayAuthorizationAttribute()]
     public class ValuesController : Controller
     {
         private readonly ITransactionService _transactionService;

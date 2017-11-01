@@ -11,7 +11,7 @@ namespace Payment.Core.Domain.Payment
         public int Status { get; set; }
         public string Result { get; set; }
 
-        //public OrderTransaction OrderTransaction { get; set; }
+        public OrderTransaction OrderTransaction { get; set; }
         //public SendOrderTransaction SendOrderTransaction { get; set; }
     }
 }

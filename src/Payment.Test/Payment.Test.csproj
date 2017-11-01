@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170628-02" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.1.18" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.1.18" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Payment.Common\Payment.Common.csproj" />
+    <ProjectReference Include="..\Payment.Core\Payment.Core.csproj" />
+    <ProjectReference Include="..\Payment.Data\Payment.Data.csproj" />
+    <ProjectReference Include="..\Payment.Gateway\Payment.Gateway.csproj" />
+    <ProjectReference Include="..\Payment.Service\Payment.Service.csproj" />
+  </ItemGroup>
+
+</Project>

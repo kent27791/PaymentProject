@@ -69,6 +69,10 @@ namespace Payment.Gateway
 
             services.AddTransient<GatewayAuthorizationAttribute>();
 
+            services.AddTransient<TestAttribute>();
+
+            services.AddTransient<TestClass>();
+
             return services.Build(_configuration, _hostingEnvironment);
         }
 

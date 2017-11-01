@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.TestPlatform.ObjectModel</id>
+    <version>11.0.0</version>
+    <title>Microsoft.TestPlatform.ObjectModel</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <licenseUrl>http://www.microsoft.com/web/webpi/eula/net_library_eula_enu.htm</licenseUrl>
+    <iconUrl>http://go.microsoft.com/fwlink/?LinkID=288859</iconUrl>
+    <description>Microsoft.TestPlatform.ObjectModel provides a set of APIs to author extensions for test platform.
+
+The 11.0 version of ObjectModel supports VS 2012 Update 5 to VS 2015 Update 3.</description>
+    <copyright>Copyright � Microsoft Corporation</copyright>
+  </metadata>
+</package>

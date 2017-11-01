@@ -14,12 +14,12 @@ using Payment.Common.Enums;
 using Newtonsoft.Json;
 using Payment.Common;
 using Payment.Core.Domain.Payment;
+using Payment.Gateway.Filters;
 
 namespace Payment.Gateway.Controllers
 {
     [Produces("application/json")]
     [Route("api/sendorder")]
-    //[GatewayMerchant]
     public class SendOrderController : Controller
     {
         private readonly ITransactionService _transactionService;

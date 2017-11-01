@@ -14,6 +14,7 @@ using Payment.Gateway.Extentions;
 using Newtonsoft.Json;
 using Payment.Common.Enums;
 using Payment.Core.Domain.Payment;
+using Payment.Gateway.Filters;
 
 namespace Payment.Gateway.Controllers
 {
